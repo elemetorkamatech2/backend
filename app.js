@@ -1,5 +1,8 @@
+var morgan = require('morgan');
+var logger = require('./logger');
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms', { stream: logger.stream }));
 const express=require('express')
-const morgan = require('morgan')
+//const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const app = express()
 const port=3002
