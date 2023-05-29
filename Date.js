@@ -3,7 +3,7 @@ const axios=require("axios");
 const apiUrl='http://www.hebcal.com/converter';
 const qp={
     cfg:'json',
-    date:'2011-06-02',
+    date:'2023-05-24',
     g2h:1,
     strict:1
 };
