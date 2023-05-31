@@ -1,10 +1,13 @@
 const express=require('express')
 const morgan = require('morgan')
+//require('dotenv').config();
 const bodyParser = require('body-parser')
 const swaggerUi = require('swagger-ui-express');
-const swaggerJsdoc = require('swagger-jsdoc');
+swaggerDocument = require('./swagger.json');
+//const swaggerJsdoc = require('swagger-jsdoc');
 const app = express()
-const port=3009
+//const port=3015
+const port = process.env.PORT;
 
 //הרשאות  
 app.use((req, res, next) => {
@@ -36,27 +39,27 @@ app.use('/UserRoute',UserR)
 app.get('/api/getAll', (req, res) => {
     res.json(listUsres);
   });
-const options = {
-    swaggerDefinition: {
-      swagger: '2.0',
-      info: {
-        title: 'My API',
-        version: '1.0.0',
-        description: 'API for my application'
-      },
-      basePath: '/api',
-      schemes: ['http'],
-    },
-    apis: ['./routes/.js'],
-  };
+// const options = {
+//     swaggerDefinition: {
+//       swagger: '2.0',
+//       info: {
+//         title: 'My API',
+//         version: '1.0.0',
+//         description: 'API for my application'
+//       },
+//       basePath: '/api',
+//       schemes: ['http'],
+//     },
+//     apis: ['./routes/.js'],
+//   };
   
-  const specs = swaggerJsdoc(options);
+ // const specs = swaggerJsdoc(options);
   
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 //שיביא בקונסול את כתובת השרת
 app.listen(port, () => {
     console.log('wow');
-    console.log(`my app is listening on http://localhost:${port}`);
+    console.log(`my app is listening on http://localhost:${port}/api-docs`);
 
 })
 
