@@ -6,11 +6,11 @@
       "description": "Node Project with swagger",
       "license": {
         "name": "MIT",
-        "url": "https://localhost:3003/api-docs"
+        "url": "https://localhost:3005/api"
       }
     },
     "schemes": ["http"],
-    "host": "localhost:3003",
+    "host": "localhost:3005",
     "basePath": "/api",
     "paths" : {
         "/getAll" : {
@@ -38,7 +38,8 @@
                 }
             }
         },
-        "/Add" : {
+        "Add" : {
+            
             "post" : {
                 "summary" : "Save the task",
                 "description": "Save the task",
@@ -67,7 +68,7 @@
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/todosResponse"
+                                "$ref": "#/definitions/user"
                             }
                         }
                     },
