@@ -1,0 +1,119 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Node Project",
+      "description": "Node Project with swagger",
+      "license": {
+        "name": "MIT",
+        "url": "https://localhost:3005/api"
+      }
+    },
+    "schemes": ["http"],
+    "host": "localhost:3005",
+    "basePath": "/api",
+    "paths" : {
+        "/getAll" : {
+            "get" : {
+                "summary" : "Get all ",
+                "description": "Get all the users",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/user"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "Add" : {
+            
+            "post" : {
+                "summary" : "Save the task",
+                "description": "Save the task",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "task object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "task" : {
+                                    "type": "object",
+                                    "$ref": "#/definitions/user"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/user"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid status value",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "user": {
+            "type": "object",
+            "properties": {
+                "id": {
+                     "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
