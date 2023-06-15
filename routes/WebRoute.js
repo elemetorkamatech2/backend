@@ -1,7 +1,7 @@
 const express = require('express');
-
 const router = express.Router();
-const { getAll } = require('../controller/UserController');
+const { getAll } = require('../controller/WebController')
 
-router.get('/getAll', getAll);
+router.get('/', getAll);
+
 module.exports = router;
