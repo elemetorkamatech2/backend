@@ -2,8 +2,9 @@
 const express=require('express')
 const morgan = require('morgan')
 //require('dotenv').config();
-// const dotenv = require('dotenv')
-// dotenv.config();
+
+ const dotenv = require('dotenv')
+ dotenv.config();
 
 const bodyParser = require('body-parser')
 const swaggerUi = require('swagger-ui-express');
@@ -11,8 +12,8 @@ const swaggerUi = require('swagger-ui-express');
 swaggerDocument = require('./swagger.json');
 //const swaggerJsdoc = require('swagger-jsdoc');
 const app = express();
-const port=3005
-//const port = process.env.PORT;
+//const port=3005
+const port = process.env.PORT;
 
 
 
