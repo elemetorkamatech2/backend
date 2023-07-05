@@ -1,5 +1,4 @@
-const axios=require("axios");
-
+import axios from "axios";
 const apiUrl='http://www.hebcal.com/converter';
 const qp={
     cfg:'json',
