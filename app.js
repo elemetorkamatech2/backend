@@ -1,12 +1,15 @@
-const express = require('express')
-const morgan = require('morgan')
+import express from 'express';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import swaggerUi from 'swagger-ui-express';
+import WebRoute from './routes/WebRoute.js';
+import swaggerDocument from './swagger.json' assert { type: 'json' };
+import dotenv from 'dotenv';
 
-const bodyParser = require('body-parser')
-const swaggerUi = require('swagger-ui-express');
-swaggerDocument = require('./swagger.json');
 const app = express();
-// const port=3005
+// eslint-disable-next-line no-undef
 const port = process.env.PORT;
+dotenv.config()
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*')
@@ -23,13 +26,11 @@ app.use('/', (req, res, next) => {
     console.log("succeed");
     next()
 })
-const WebR = require('./routes/WebRoute')
-app.use('/website', WebR)
+app.use('/website', WebRoute)
 
 app.get('/', (req, res) => {
     res.status(200).json({ 'message': 'hello!!!!! :)' })
 })
-
 app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(port, () => {
     console.log('wow');
