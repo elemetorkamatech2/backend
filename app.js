@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import swaggerUi from 'swagger-ui-express';
-import WebRoute from './routes/WebRoute.js';
+import WebRoute from './api/routes/WebRoute.js';
 import swaggerDocument from './swagger.json' assert { type: 'json' };
 import dotenv from 'dotenv';
 
@@ -26,7 +26,7 @@ app.use('/', (req, res, next) => {
     console.log("succeed");
     next()
 })
-app.use('/website', WebRoute)
+app.use('/', WebRoute)
 
 app.get('/', (req, res) => {
     res.status(200).json({ 'message': 'hello!!!!! :)' })
