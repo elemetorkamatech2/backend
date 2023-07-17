@@ -8,7 +8,6 @@ import dotenv from 'dotenv';
 import Keycloak from 'keycloak-connect';
 
 const app = express();
-// eslint-disable-next-line no-undef
 const port = process.env.PORT;
 dotenv.config()
 
@@ -20,25 +19,23 @@ const keycloakConfig = {
 const keycloak = new Keycloak({}, keycloakConfig);
 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, userid');
     if (req.method === 'OPTIONS') {
         res.status(200).header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET').send();
     } else {
         next();
     }
-})
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//     if (req.method === 'OPTIONS') {
-//         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-//         return res.status(200).send();
-//     } else {
-//         next();
-//     }
-// });
+});
+
 app.use(keycloak.middleware());
+const addUserIdMiddleware = (req, res, next) => {
+    const userId = req.headers.userid;
+    console.log('idToNode '+ userId);
+    req.userId = userId;
+    next();
+  };
+app.use(addUserIdMiddleware);
 app.use(keycloak.protect());
 app.use(bodyParser.json())
 app.use(morgan('dev'))
@@ -46,10 +43,6 @@ app.use('/', (req, res, next) => {
     console.log("succeed");
     next()
 })
-// app.use((req, res, next) => {
-//     console.log(req.headers.authorization);
-//     next();
-// });
 
 app.use('/website', WebRoute)
 

@@ -17,14 +17,26 @@ export default {
         res.status(404).send(err.message);
       })
   },
+  // getCheck: async (req, res) => {
+  //   try {
+  //     console.log(req.headers.authorization);
+  //     const { sub, email } = req.kauth.grant.access_token.content;
+  //     res.send(`Protected route accessed by user ${sub} (${email})`);
+  //     console.log(`Protected route accessed by user ${sub} (${email})`)
+  //   } catch (error) {
+  //     console.log("eeeeerror", error);
+  //   }
+  // }
   getCheck: async (req, res) => {
     try {
-      console.log(req.headers.authorization);
-      const { sub, email } = req.kauth.grant.access_token.content;
-      res.send(`Protected route accessed by user ${sub} (${email})`);
-      console.log(`Protected route accessed by user ${sub} (${email})`)
+      const userId = req.headers.userid;
+      console.log(`Protected route accessed by user ${userId}`);
+      // כאן תוכל להוסיף פעולות נוספות שמשתמשות במזהה המשתמש
+  
+      res.send(`Protected route accessed by user ${userId}`);
     } catch (error) {
-      console.log("eeeeerror", error);
+      console.log("Error:", error);
+      res.status(500).send("Internal Server Error");
     }
   }
 }
