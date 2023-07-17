@@ -30,5 +30,38 @@ export default {
       .catch((err) => {
         res.status(404).send(err.message);
       })
+  },
+  filterdate: async (req, res) => {
+    const date = req.params.date;
+    axios.
+    
+    
+    
+    
+    
+    
+    get(process.env.SERVER_PORT, config)
+      .then((respons) => {
+        const data = respons.data;
+        const filteredData = data.filter(x => x.date === date)
+        console.log(filteredData);
+        res.status(200).send(filteredData);
+      })
+      .catch((err) => {
+        res.status(404).send(err.message);
+      })
+  },
+  filtermemory: async (req, res) => {
+    const memory = req.params.memory;
+    axios.get(process.env.SERVER_PORT, config)
+      .then((respons) => {
+        const data = respons.data;
+        const filteredData = data.filter(x => x.memory === memory)
+        console.log(filteredData);
+        res.status(200).send(filteredData);
+      })
+      .catch((err) => {
+        res.status(404).send(err.message);
+      })
   }
 }
