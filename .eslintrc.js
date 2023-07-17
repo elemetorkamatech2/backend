@@ -3,7 +3,9 @@ module.exports = {
         "browser": true,
         "es2021": true,
         "node":true,
-        "react":true
+        "react":true,
+        "parser": '@babel/eslint-parser',
+
     },
     "extends": [
         "eslint:recommended",

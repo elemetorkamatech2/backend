@@ -1,8 +1,7 @@
-const express = require('express');
+import express from 'express';
+import webControler from '../controller/WebController.js';
+
 const router = express.Router();
-//צביה
-const { getAll } = require('../controller/WebController')
 
-router.get('/', getAll);
-
-module.exports = router;
+router.get('/', webControler.getAll);
+export default router;
