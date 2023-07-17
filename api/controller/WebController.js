@@ -30,5 +30,14 @@ export default {
       .catch((err) => {
         res.status(404).send(err.message);
       })
-  }
+  },
+  post: async (req, res) => {
+    axios.post(process.env.SERVER_LOCALHOST, req.body, config)
+      .then((respons) => { 
+        res.status(200).send(respons.data);
+      })
+      .catch((err) => {
+        res.status(404).send(err.message);
+      })
+  },
 }
