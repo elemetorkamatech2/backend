@@ -32,24 +32,14 @@ export default {
       })
   },
   filterdate: async (req, res) => {
-    const date = req.params.date;
-    axios.
-    
-    
-    
-    
-    
-    
-    get(process.env.SERVER_PORT, config)
-      .then((respons) => {
-        const data = respons.data;
-        const filteredData = data.filter(x => x.date === date)
-        console.log(filteredData);
-        res.status(200).send(filteredData);
-      })
-      .catch((err) => {
-        res.status(404).send(err.message);
-      })
+    try {
+      const date = req.params.date;
+      const result = await servise.filterdate(date);
+      return { success: true, message:result };
+    } catch (error) {
+      logger.info(error);
+      return { success: false, message: error.message };
+    }
   },
   filtermemory: async (req, res) => {
     const memory = req.params.memory;
