@@ -26,7 +26,7 @@ app.use('/', (req, res, next) => {
     console.log("succeed");
     next()
 })
-app.use('/', WebRoute)
+app.use('/website', WebRoute)
 
 app.get('/', (req, res) => {
     res.status(200).json({ 'message': 'hello!!!!! :)' })

@@ -31,15 +31,30 @@ export default {
         res.status(404).send(err.message);
       })
   },
+
   filterdate: async (req, res) => {
-    try {
-      const date = req.params.date;
-      const result = await servise.filterdate(date);
-      return { success: true, message:result };
-    } catch (error) {
-      logger.info(error);
-      return { success: false, message: error.message };
-    }
+    const date = req.params.date;
+    axios.get(process.env.SERVER_PORT, config)
+      .then((respons) => {
+        const data = respons.data;
+        const filteredData = data.filter(x => x.date === date)
+        console.log(filteredData);
+        res.status(200).send(filteredData);
+      })
+      .catch((err) => {
+        res.status(404).send(err.message);
+      })
+      post: async (req, res) => {
+        axios.post(process.env.SERVER_LOCALHOST, req.body, config)
+          .then((respons) => { 
+            res.status(200).send(respons.data);
+          })
+            .catch((err) => {
+              res.status(404).send(err.message);
+            })
+
+  }
+
   },
   filtermemory: async (req, res) => {
     const memory = req.params.memory;
@@ -53,5 +68,17 @@ export default {
       .catch((err) => {
         res.status(404).send(err.message);
       })
+      post: async (req, res) => {
+        axios.post(process.env.SERVER_LOCALHOST, req.body, config)
+          .then((respons) => { 
+            res.status(200).send(respons.data);
+          })
+            .catch((err) => {
+              res.status(404).send(err.message);
+            })
+
   }
+
+  },
+
 }
